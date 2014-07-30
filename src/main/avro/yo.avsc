@@ -1,0 +1,81 @@
+[
+	"null",
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "User",
+		"doc": "represents user",
+		"fields":[
+			{"name": "name", "type": "string"},
+			{"name": "id", "type": "long"}
+		]
+	},
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "MessagePayload",
+		"doc": "represents plain message payload",
+		"fields":[
+			{"name": "content", "type": "string"}
+		]
+	},
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "RequestPayLoad",
+		"doc": "represents request message payload",
+		"fields":[
+			{"name": "requetMessage", "type": ["null", "string"]}
+		]
+	},
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "ResponsePayLoad",
+		"doc": "represents response message payload",
+		"fields":[
+			{"name": "responseMessage", "type": ["null", "string"]},
+			{"name": "status", "type": "boolean"}
+		]
+	},
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "FriendListPayLoad",
+		"doc": "represents friend list message payload",
+		"fields":[
+			{"name": "friends", "type": 
+				{
+					"type": "array",
+					"items": "com.ml.gb.yo.User"
+				}
+			}
+		]	
+	},
+	{
+		"namespace": "com.ml.gb.yo",
+		"type": "record",
+		"name": "Message",
+		"doc": "represents a message, it could be four different types and have different payloads",
+		"fields":[
+			{"name": "sender", "type":"com.ml.gb.yo.User"},
+			{"name": "receiver", "type":"com.ml.gb.yo.User"},
+			{"name": "timestamp", "type": "long"},
+			{"name": "payload", "type": [
+				"null", 
+				"com.ml.gb.yo.MessagePayload",
+				"com.ml.gb.yo.RequestPayLoad",
+				"com.ml.gb.yo.ResponsePayLoad",
+				"com.ml.gb.yo.FriendListPayLoad"
+			]},
+			{"name": "messageType", "type":
+				{
+					"type": "enum",
+					"doc": "the type of a message, could be plain string, request, response or friendlist",
+					"name": "MessageType",
+			  		"symbols": ["MESSAGE", "REQUEST", "RESPONSE", "FRIENDLIST"]
+				}
+			}
+		]
+	}
+]
